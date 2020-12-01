@@ -18,8 +18,7 @@ app.use(express.json());
 
 //#region Routes
 
-app.use("/api/users", require("./routes/users.routes"));
-app.use("/api/notes", require("./routes/notes.routes"));
+app.use("/api/products", require("./routes/products.routes"));
 
 //#endregion
 
