@@ -20,7 +20,8 @@
 }
 
 .form-contain form .form-description {
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 60px;
 }
 
 .form-contain form .form-control {
@@ -36,7 +37,7 @@
 
 .form-contain form .form-control input {
   font-size: 22px;
-  width: 200px;
+  width: 280px;
 }
 
 .form-contain form .error-message {

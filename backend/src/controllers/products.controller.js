@@ -50,4 +50,24 @@ productsController.disable = async (req, res) => {
   res.send({ success: true, message: "Product updated" });
 };
 
+productsController.isDuplicated = async (req, res) => {
+  const barcode = req.params.barcode;
+  const results = await productModel.find({ barcode });
+  if (results.length > 0) {
+    res.send({ duplicated: true });
+  } else {
+    res.send({ duplicated: false });
+  }
+};
+
+productsController.isDuplicatedForUpdate = async (req, res) => {
+  const barcode = req.params.barcode;
+  const results = await productModel.find({ barcode });
+  if (results.length > 1) {
+    res.send({ duplicated: true });
+  } else {
+    res.send({ duplicated: false });
+  }
+};
+
 module.exports = productsController;

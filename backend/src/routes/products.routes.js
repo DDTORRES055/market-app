@@ -14,4 +14,8 @@ productsRouter.route("/enable/:id").put(productsController.enable);
 
 productsRouter.route("/disable/:id").put(productsController.disable);
 
+productsRouter.route("/isDuplicated/:barcode").get(productsController.isDuplicated);
+
+productsRouter.route("/isDuplicatedForUpdate/:barcode").get(productsController.isDuplicatedForUpdate);
+
 module.exports = productsRouter;

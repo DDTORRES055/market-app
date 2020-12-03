@@ -66,6 +66,16 @@ const MainProvider = ({ children }) => {
     }
   };
 
+  const isDuplicated = async (barcode) => {
+    const response = await Request.get(`/products/isDuplicated/${barcode}`);
+    return response.data.duplicated;
+  };
+
+  const isDuplicatedForUpdate = async (barcode) => {
+    const response = await Request.get(`/isDuplicatedForUpdate/${barcode}`);
+    return response.data.duplicated;
+  };
+
   return (
     <Provider
       value={{
@@ -78,6 +88,8 @@ const MainProvider = ({ children }) => {
         disable,
         modalVisible,
         setModalVisible,
+        isDuplicated,
+        isDuplicatedForUpdate,
       }}
     >
       {children}

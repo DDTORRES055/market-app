@@ -5,7 +5,7 @@ import FormControl from "../FormControl/FormControl.component";
 import "../FormsStyles/FormsStyles.styles.css";
 
 export default function AddProductForm() {
-  const { setModalVisible, addProduct } = useContext(MainContext);
+  const { setModalVisible, addProduct, isDuplicated } = useContext(MainContext);
   const [product, setProduct] = useState({
     "addProduct-barcode": "",
     "addProduct-name": "",
@@ -25,6 +25,9 @@ export default function AddProductForm() {
       errors.barcode = "Campo obligatorio";
     } else if (!/\d\d\d\d\d\d\d\d\d\d\d\d\d/.test(product["addProduct-barcode"])) {
       errors.barcode = "Formato Incorrecto";
+    } else if (await isDuplicated(product["addProduct-barcode"])) {
+      errors.duplicated = true;
+      errors.barcode = "Código de barras duplicado";
     }
 
     if (!product["addProduct-name"]) {
@@ -33,9 +36,6 @@ export default function AddProductForm() {
       errors.name = "Formato Incorrecto";
     }
 
-    console.log(!Number.isInteger(product["addProduct-quantity"]));
-    console.log(product["addProduct-quantity"] < 1);
-    console.log(product["addProduct-quantity"] > 1000);
     if (!product["addProduct-quantity"]) {
       errors.quantity = "Campo obligatorio";
     } else if (
@@ -56,7 +56,7 @@ export default function AddProductForm() {
       "addProduct-quantity": errors.quantity,
     });
 
-    if (!errors.barcode && !errors.name && !errors.quantity) {
+    if (!errors.barcode && !errors.duplicated && !errors.name && !errors.quantity) {
       if (
         await addProduct(
           product["addProduct-barcode"],
