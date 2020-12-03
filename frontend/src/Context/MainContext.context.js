@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Requests from "../Services/Requests.service";
+import Request from "../Services/Request.service";
 const MainContext = React.createContext();
 const { Provider, Consumer } = MainContext;
 
@@ -11,7 +11,7 @@ const MainProvider = ({ children }) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await Requests.get("/products");
+      const response = await Request.get("/products");
       setProducts(response.data);
     };
     getProducts();
@@ -22,6 +22,7 @@ const MainProvider = ({ children }) => {
     const response = await Request.post("/products", { barcode, name, quantity });
     if (!!response.data.success) {
       setRefresh(true);
+      return response.data.message;
     }
   };
 

@@ -1,9 +1,7 @@
-/* Modal */
-
 .modal-container {
   height: 100vh;
   width: 100%;
-  background-color: #eff5f9dd;
+  background-color: #000000aa;
   display: flex;
   position: fixed;
   z-index: 2;
@@ -19,33 +17,9 @@
 
 .modal-container .modal-box {
   min-height: 480px;
-  width: 420px;
+  width: 600px;
   text-align: center;
-  background-color: #fff;
+  background-color: #a2c4c9;
   margin: auto;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.modal-container .modal-box .closeModalIcon {
-  text-align: end;
-}
-
-.modal-container .modal-box .closeModalIcon {
-  position: relative;
-  top: 15px;
-  right: 15px;
-  height: 25px;
-}
-
-.modal-container .modal-box .closeModalIcon svg {
-  width: 40px;
-}
-
-.modal-container .modal-box .closeModalIcon svg:hover {
-  cursor: pointer;
-}
-
-.modal-container .modal-box .logotype img {
-  height: 70px;
+  border: solid 3px black;
 }
