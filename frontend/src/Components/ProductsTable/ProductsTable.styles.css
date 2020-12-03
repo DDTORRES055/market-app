@@ -1,0 +1,80 @@
+#products-table table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+#products-table table {
+  border: 1px solid black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#products-table thead tr td {
+  padding: 5px 15px 5px 5px;
+  background-color: #cccccc;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+#products-table tbody tr {
+  height: 50px;
+}
+
+#products-table tbody tr td {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding-left: 2px;
+  padding-right: 18px;
+}
+
+#products-table tbody tr:nth-child(2n + 1) td {
+  background-color: #eeeeee;
+}
+
+table thead {
+  display: block;
+}
+
+table tbody {
+  height: 350px;
+  overflow-y: auto;
+  display: block;
+}
+#products-table thead tr td:nth-child(1),
+tbody tr td:nth-child(1) {
+  width: 170px;
+}
+
+#products-table thead tr td:nth-child(2),
+tbody tr td:nth-child(2) {
+  width: 450px;
+}
+
+#products-table thead tr td:nth-child(3),
+tbody tr td:nth-child(3) {
+  width: 120px;
+}
+
+#products-table thead tr td:nth-child(4),
+tbody tr td:nth-child(4) {
+  width: 180px;
+}
+
+#products-table thead tr td:nth-child(5),
+tbody tr td:nth-child(5) {
+  width: 150px;
+}
+
+.icons-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icons-container img:hover {
+  cursor: pointer;
+}
+
+.icons-container img.empty-icon:hover {
+  cursor: auto;
+}

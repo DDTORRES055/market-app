@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Comic Sans MS", Arial, Helvetica, sans-serif;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 500px;
+}
+
+#main-title {
+  font-size: 50px;
+}
