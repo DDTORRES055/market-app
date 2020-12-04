@@ -5,9 +5,14 @@ import FormControl from "../FormControl/FormControl.component";
 import "../FormsStyles/FormsStyles.styles.css";
 
 export default function UpdateProductForm() {
-  const { modalVisible, setModalVisible, updateProduct, isDuplicatedForUpdate, productToUpdate } = useContext(
-    MainContext
-  );
+  const {
+    setSuccessMessage,
+    modalVisible,
+    setModalVisible,
+    updateProduct,
+    isDuplicatedForUpdate,
+    productToUpdate,
+  } = useContext(MainContext);
   const [product, setProduct] = useState({
     "updateProduct-barcode": "",
     "updateProduct-name": "",
@@ -86,6 +91,10 @@ export default function UpdateProductForm() {
           "updateProduct-quantity": "",
         });
         setModalVisible(null);
+        setSuccessMessage("El producto se ha editado exitosamente.");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 2000);
       }
     }
   };

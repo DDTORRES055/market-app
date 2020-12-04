@@ -7,6 +7,7 @@ const MainProvider = ({ children }) => {
   const [refresh, setRefresh] = useState(false);
   const [modalVisible, setModalVisible] = useState(null);
   const [productToUpdate, setProductToUpdate] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [products, setProducts] = useState([]);
 
@@ -23,7 +24,7 @@ const MainProvider = ({ children }) => {
     const response = await Request.post("/products", { barcode, name, quantity });
     if (!!response.data.success) {
       setRefresh(true);
-      return response.data.message;
+      return response.data.success;
     }
   };
 
@@ -39,7 +40,7 @@ const MainProvider = ({ children }) => {
     const response = await Request.put(`/products/${id}`, { barcode, name, quantity });
     if (!!response.data.success) {
       setRefresh(true);
-      return response.data.message;
+      return response.data.success;
     }
   };
 
@@ -47,7 +48,7 @@ const MainProvider = ({ children }) => {
     const response = await Request.put(`/products/setPrice/${id}`, { price });
     if (!!response.data.success) {
       setRefresh(true);
-      return response.data.message;
+      return response.data.success;
     }
   };
 
@@ -55,7 +56,7 @@ const MainProvider = ({ children }) => {
     const response = await Request.put(`/products/enable/${id}`);
     if (!!response.data.success) {
       setRefresh(true);
-      return response.data.message;
+      return response.data.success;
     }
   };
 
@@ -63,7 +64,7 @@ const MainProvider = ({ children }) => {
     const response = await Request.put(`/products/disable/${id}`);
     if (!!response.data.success) {
       setRefresh(true);
-      return response.data.message;
+      return response.data.success;
     }
   };
 
@@ -93,6 +94,8 @@ const MainProvider = ({ children }) => {
         isDuplicatedForUpdate,
         productToUpdate,
         setProductToUpdate,
+        successMessage,
+        setSuccessMessage,
       }}
     >
       {children}

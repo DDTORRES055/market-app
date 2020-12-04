@@ -11,7 +11,7 @@ import DisableProductForm from "../Forms/DisableProductForm/DisableProductForm.c
 import Button from "../Button/Button.component";
 
 export default function MainMenu() {
-  const { products, setModalVisible } = useContext(MainContext);
+  const { successMessage, products, setModalVisible } = useContext(MainContext);
   return (
     <div id="main">
       <Modal>
@@ -30,6 +30,7 @@ export default function MainMenu() {
         <DisableProductForm form="disableProduct" />
       </Modal>
       <div id="main-title">Catálogo de productos</div>
+      <div id="main-message">{successMessage}</div>
       <ProductsTable products={products} />
       <Button onClick={() => setModalVisible("addProduct")} text="Registrar" />
     </div>

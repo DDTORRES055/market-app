@@ -5,7 +5,7 @@ import FormControl from "../FormControl/FormControl.component";
 import "../FormsStyles/FormsStyles.styles.css";
 
 export default function AddProductForm() {
-  const { setModalVisible, addProduct, isDuplicated } = useContext(MainContext);
+  const { setSuccessMessage, setModalVisible, addProduct, isDuplicated } = useContext(MainContext);
   const [product, setProduct] = useState({
     "addProduct-barcode": "",
     "addProduct-name": "",
@@ -73,6 +73,10 @@ export default function AddProductForm() {
           "addProduct-quantity": "",
         });
         setModalVisible(null);
+        setSuccessMessage("El producto se ha registrado exitosamente.");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 2000);
       }
     }
   };

@@ -16,3 +16,11 @@
 #main-title {
   font-size: 50px;
 }
+
+#main-message {
+  color: #009e0f;
+  font-size: 22px;
+  text-align: start;
+  width: 1300px;
+  height: 22px;
+}

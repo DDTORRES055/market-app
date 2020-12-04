@@ -5,7 +5,7 @@ import FormControl from "../FormControl/FormControl.component";
 import "../FormsStyles/FormsStyles.styles.css";
 
 export default function AddPriceForm() {
-  const { modalVisible, setModalVisible, setPrice, productToUpdate } = useContext(MainContext);
+  const { setSuccessMessage, modalVisible, setModalVisible, setPrice, productToUpdate } = useContext(MainContext);
   const [product, setProduct] = useState({
     "addPrice-price": "",
   });
@@ -30,6 +30,14 @@ export default function AddPriceForm() {
           "addPrice-price": "",
         });
         setModalVisible(null);
+        if (!productToUpdate.price) {
+          setSuccessMessage("");
+        } else {
+          setSuccessMessage("El precio se ha asignado exitosamente.");
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 2000);
+        }
       }
       return;
     } else if (
@@ -52,6 +60,10 @@ export default function AddPriceForm() {
           "addPrice-price": "",
         });
         setModalVisible(null);
+        setSuccessMessage("El precio se ha asignado exitosamente.");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 2000);
       }
     }
   };
