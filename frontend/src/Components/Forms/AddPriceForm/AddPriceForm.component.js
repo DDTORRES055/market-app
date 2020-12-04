@@ -93,9 +93,7 @@ export default function AddPriceForm() {
       <div className="form-title">Asignar Precio</div>
       <form>
         <div className="form-inputs">
-          <div className="form-description">
-            Los campos marcados con <span className="required">*</span> son obligatorios
-          </div>
+          <div className="form-description"></div>
           <table className="form-data">
             <tr>
               <td className="property">
@@ -119,7 +117,7 @@ export default function AddPriceForm() {
           <FormControl
             id="addPrice-price"
             label="Precio:"
-            required={true}
+            required={false}
             message={errorFields["addPrice-price"]}
             value={product["addPrice-price"]}
             onChange={OnChangeText}
