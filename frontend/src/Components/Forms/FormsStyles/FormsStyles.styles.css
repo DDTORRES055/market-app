@@ -24,6 +24,18 @@
   margin-bottom: 60px;
 }
 
+.form-contain form .form-data tr td {
+  padding-bottom: 40px;
+}
+
+.form-contain form .form-data .property {
+  text-align: end;
+}
+
+.form-contain form .form-data .value {
+  text-align: start;
+}
+
 .form-contain form .form-control {
   margin-top: 10px;
   display: flex;

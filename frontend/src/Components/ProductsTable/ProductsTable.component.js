@@ -19,7 +19,7 @@ export default function ProductsTable(props) {
           <td>{product.barcode}</td>
           <td>{product.name}</td>
           <td>{product.quantity}</td>
-          <td>{product.price}</td>
+          <td>{product.price ? product.price.toString() : ""}</td>
           <td>
             <div className="icons-container">
               {product.price ? (
@@ -34,7 +34,14 @@ export default function ProductsTable(props) {
               {!product.barcode || product.enabled ? (
                 <img className="empty-icon" src="/images/nanai.png" alt="Vacio" />
               ) : (
-                <img src="/images/editprecio.png" alt="Precio" />
+                <img
+                  src="/images/editprecio.png"
+                  alt="Precio"
+                  onClick={async () => {
+                    setProductToUpdate(await getProduct(product._id));
+                    setModalVisible("addPrice");
+                  }}
+                />
               )}
               {!product.barcode || product.enabled ? (
                 <img className="empty-icon" src="/images/nanai.png" alt="Vacio" />

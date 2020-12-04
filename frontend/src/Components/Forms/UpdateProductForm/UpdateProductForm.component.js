@@ -21,7 +21,7 @@ export default function UpdateProductForm() {
   });
 
   useEffect(() => {
-    if (modalVisible == "updateProduct") {
+    if (modalVisible === "updateProduct") {
       setProduct({
         "updateProduct-barcode": productToUpdate.barcode.toString(),
         "updateProduct-name": productToUpdate.name.toString(),
