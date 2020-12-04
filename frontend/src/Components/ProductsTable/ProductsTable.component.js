@@ -24,9 +24,23 @@ export default function ProductsTable(props) {
             <div className="icons-container">
               {product.price ? (
                 product.enabled ? (
-                  <img src="/images/habx24.png" alt="Habilitar" />
+                  <img
+                    src="/images/habx24.png"
+                    alt="Deshabilitar"
+                    onClick={async () => {
+                      setProductToUpdate(await getProduct(product._id));
+                      setModalVisible("disableProduct");
+                    }}
+                  />
                 ) : (
-                  <img src="/images/deshab.png" alt="Deshabilitar" />
+                  <img
+                    src="/images/deshab.png"
+                    alt="Habilitar"
+                    onClick={async () => {
+                      setProductToUpdate(await getProduct(product._id));
+                      setModalVisible("enableProduct");
+                    }}
+                  />
                 )
               ) : (
                 <img className="empty-icon" src="/images/nanai.png" alt="Vacio" />

@@ -5,7 +5,7 @@ import FormControl from "../FormControl/FormControl.component";
 import "../FormsStyles/FormsStyles.styles.css";
 
 export default function AddPriceForm() {
-  const { modalVisible, setModalVisible, setPrice, isDuplicatedForUpdate, productToUpdate } = useContext(MainContext);
+  const { modalVisible, setModalVisible, setPrice, productToUpdate } = useContext(MainContext);
   const [product, setProduct] = useState({
     "addPrice-price": "",
   });
