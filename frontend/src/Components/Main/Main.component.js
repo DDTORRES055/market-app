@@ -4,6 +4,7 @@ import "./Main.styles.css";
 import ProductsTable from "../ProductsTable/ProductsTable.component";
 import Modal from "../Modal/Modal.component";
 import AddProductForm from "../Forms/AddProductForm/AddProductForm.component";
+import UpdateProductForm from "../Forms/UpdateProductForm/UpdateProductForm.component";
 import Button from "../Button/Button.component";
 
 export default function MainMenu() {
@@ -12,6 +13,9 @@ export default function MainMenu() {
     <div id="main">
       <Modal>
         <AddProductForm form="addProduct" />
+      </Modal>
+      <Modal>
+        <UpdateProductForm form="updateProduct" />
       </Modal>
       <div id="main-title">Catálogo de productos</div>
       <ProductsTable products={products} />

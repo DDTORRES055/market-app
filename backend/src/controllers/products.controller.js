@@ -10,7 +10,7 @@ productsController.getProducts = async (req, res) => {
 productsController.getProduct = async (req, res) => {
   const id = req.params.id;
   const product = await productModel.findById(id);
-  res.json(product);
+  res.json({ success: true, product });
 };
 
 productsController.createProduct = async (req, res) => {
@@ -61,10 +61,15 @@ productsController.isDuplicated = async (req, res) => {
 };
 
 productsController.isDuplicatedForUpdate = async (req, res) => {
+  const id = req.params.id;
   const barcode = req.params.barcode;
   const results = await productModel.find({ barcode });
-  if (results.length > 1) {
-    res.send({ duplicated: true });
+  if (results.length > 0) {
+    if (results[0]._id.toString() === id.toString()) {
+      res.send({ duplicated: false });
+    } else {
+      res.send({ duplicated: true });
+    }
   } else {
     res.send({ duplicated: false });
   }

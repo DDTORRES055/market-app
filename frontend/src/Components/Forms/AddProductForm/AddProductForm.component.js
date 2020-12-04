@@ -23,7 +23,10 @@ export default function AddProductForm() {
 
     if (!product["addProduct-barcode"]) {
       errors.barcode = "Campo obligatorio";
-    } else if (!/\d\d\d\d\d\d\d\d\d\d\d\d\d/.test(product["addProduct-barcode"])) {
+    } else if (
+      !/\d\d\d\d\d\d\d\d\d\d\d\d\d/.test(product["addProduct-barcode"]) ||
+      product["addProduct-barcode"].length > 13
+    ) {
       errors.barcode = "Formato Incorrecto";
     } else if (await isDuplicated(product["addProduct-barcode"])) {
       errors.duplicated = true;
@@ -77,6 +80,12 @@ export default function AddProductForm() {
   const onCancel = (event) => {
     setProduct({
       "addProduct-barcode": "",
+      "addProduct-name": "",
+      "addProduct-quantity": "",
+    });
+    setErrorFields({
+      "addProduct-barcode": "",
+      "addProduct-duplicated-barcode": "",
       "addProduct-name": "",
       "addProduct-quantity": "",
     });

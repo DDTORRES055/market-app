@@ -6,6 +6,7 @@ const { Provider, Consumer } = MainContext;
 const MainProvider = ({ children }) => {
   const [refresh, setRefresh] = useState(false);
   const [modalVisible, setModalVisible] = useState(null);
+  const [productToUpdate, setProductToUpdate] = useState({});
 
   const [products, setProducts] = useState([]);
 
@@ -29,7 +30,7 @@ const MainProvider = ({ children }) => {
   const getProduct = async (id) => {
     const response = await Request.get(`/products/${id}`);
     if (!!response.data.success) {
-      return response.data;
+      return response.data.product;
     }
     return {};
   };
@@ -71,8 +72,8 @@ const MainProvider = ({ children }) => {
     return response.data.duplicated;
   };
 
-  const isDuplicatedForUpdate = async (barcode) => {
-    const response = await Request.get(`/isDuplicatedForUpdate/${barcode}`);
+  const isDuplicatedForUpdate = async (id, barcode) => {
+    const response = await Request.get(`/products/isDuplicatedForUpdate/${id}/${barcode}`);
     return response.data.duplicated;
   };
 
@@ -90,6 +91,8 @@ const MainProvider = ({ children }) => {
         setModalVisible,
         isDuplicated,
         isDuplicatedForUpdate,
+        productToUpdate,
+        setProductToUpdate,
       }}
     >
       {children}

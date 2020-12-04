@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MainContext } from "../../Context/MainContext.context";
 import "./ProductsTable.styles.css";
 
 export default function ProductsTable(props) {
+  const { setModalVisible, setProductToUpdate, getProduct } = useContext(MainContext);
   const products = props.products || [];
 
   const renderProducts = () => {
@@ -37,7 +39,14 @@ export default function ProductsTable(props) {
               {!product.barcode || product.enabled ? (
                 <img className="empty-icon" src="/images/nanai.png" alt="Vacio" />
               ) : (
-                <img src="/images/lapizx24.png" alt="Editar" />
+                <img
+                  src="/images/lapizx24.png"
+                  alt="Editar"
+                  onClick={async () => {
+                    setProductToUpdate(await getProduct(product._id));
+                    setModalVisible("updateProduct");
+                  }}
+                />
               )}
             </div>
           </td>
