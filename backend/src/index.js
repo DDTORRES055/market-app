@@ -1,6 +1,6 @@
-//require("dotenv").config();
+//?require("dotenv").config(); Environment variables config
 
-require("./database");
+//!require("./database"); Deprecated
 
 const app = require("./app");
 

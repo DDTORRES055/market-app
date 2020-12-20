@@ -1,73 +1,62 @@
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//!         Deprecated              !!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 const productsController = {};
 
-const pool = require("../database");
+const productModel = require("../models/product.model");
 
 productsController.getProducts = async (req, res) => {
-  const products = await pool.query("SELECT * FROM products");
+  const products = await productModel.find();
   res.json(products);
 };
 
 productsController.getProduct = async (req, res) => {
   const id = req.params.id;
-  const products = await pool.query("SELECT * FROM products WHERE _id = ?", [id]);
-  const product = products[0];
+  const product = await productModel.findById(id);
   res.json({ success: true, product });
 };
 
 productsController.createProduct = async (req, res) => {
   const { barcode, name, quantity } = req.body;
-  const newProduct = {
+  const newProduct = new productModel({
     barcode,
     name,
     quantity,
-  };
-  await pool.query("INSERT INTO products set ?", [newProduct]);
+  });
+  await newProduct.save();
   res.send({ success: true, message: "Product saved" });
 };
 
 productsController.updateProduct = async (req, res) => {
   const { barcode, name, quantity } = req.body;
-  const newProduct = {
-    barcode,
-    name,
-    quantity,
-  };
   const id = req.params.id;
-  await pool.query("UPDATE products set ? WHERE _id = ?", [newProduct, id]);
+  await productModel.findByIdAndUpdate(id, { barcode, name, quantity });
   res.send({ success: true, message: "Product updated" });
 };
 
 productsController.setPrice = async (req, res) => {
   const { price } = req.body;
-  const newProduct = {
-    price,
-  };
   const id = req.params.id;
-  await pool.query("UPDATE products set ? WHERE _id = ?", [newProduct, id]);
+  await productModel.findByIdAndUpdate(id, { price });
   res.send({ success: true, message: "Product updated" });
 };
 
 productsController.enable = async (req, res) => {
   const id = req.params.id;
-  const newProduct = {
-    enabled: true,
-  };
-  await pool.query("UPDATE products set ? WHERE _id = ?", [newProduct, id]);
+  await productModel.findByIdAndUpdate(id, { enabled: true });
   res.send({ success: true, message: "Product updated" });
 };
 
 productsController.disable = async (req, res) => {
   const id = req.params.id;
-  const newProduct = {
-    enabled: false,
-  };
-  await pool.query("UPDATE products set ? WHERE _id = ?", [newProduct, id]);
+  await productModel.findByIdAndUpdate(id, { enabled: false });
   res.send({ success: true, message: "Product updated" });
 };
 
 productsController.isDuplicated = async (req, res) => {
   const barcode = req.params.barcode;
-  const results = await pool.query("SELECT * FROM products WHERE barcode = ?", [barcode]);
+  const results = await productModel.find({ barcode });
   if (results.length > 0) {
     res.send({ duplicated: true });
   } else {
@@ -78,7 +67,7 @@ productsController.isDuplicated = async (req, res) => {
 productsController.isDuplicatedForUpdate = async (req, res) => {
   const id = req.params.id;
   const barcode = req.params.barcode;
-  const results = await pool.query("SELECT * FROM products WHERE barcode = ?", [barcode]);
+  const results = await productModel.find({ barcode });
   if (results.length > 0) {
     if (results[0]._id.toString() === id.toString()) {
       res.send({ duplicated: false });
