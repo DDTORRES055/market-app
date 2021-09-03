@@ -1,3 +1,3 @@
 export default {
-  backendURL: "http://localhost:4000",
+  backendURL: "https://team-market-app.herokuapp.com",
 };
