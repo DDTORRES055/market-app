@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const URI = process.env.DATABASE_URI || "mongodb://localhost/market-app-database";
+const URI = process.env["NODE_ENV"] === "test" ? process.env.DATABASE_URI_TEST : process.env.DATABASE_URI || "mongodb://localhost/market-app-database";
 
 mongoose.connect(URI, {
   useNewUrlParser: true,
