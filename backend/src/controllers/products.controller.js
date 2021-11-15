@@ -15,6 +15,14 @@ productsController.getProduct = async (req, res) => {
 
 productsController.createProduct = async (req, res) => {
   const { barcode, name, quantity } = req.body;
+
+  const products = await productModel.find({ barcode: { $eq: barcode } });
+
+  if (products.length > 0) {
+    res.send({ success: false, message: "Code duplicated" });
+    return;
+  }
+
   const newProduct = new productModel({
     barcode,
     name,
