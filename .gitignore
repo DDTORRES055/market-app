@@ -6,4 +6,5 @@
 */.scannerwork
 */coverage
 backend/src/public
-deploy.sh
+deploy.*
+build.*

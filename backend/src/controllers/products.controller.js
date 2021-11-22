@@ -39,6 +39,19 @@ productsController.updateProduct = async (req, res) => {
   res.send({ success: true, message: "Product updated" });
 };
 
+productsController.deleteProduct = async (req, res) => {
+  const id = req.params.id;
+  const product = await productModel.findById(id);
+
+  if (!product) {
+    res.send({ success: false, message: "Product doesn't exists" });
+    return;
+  }
+
+  await productModel.findByIdAndDelete(id);
+  res.send({ success: true, message: "Product deleted" });
+};
+
 productsController.setPrice = async (req, res) => {
   const { price } = req.body;
   const id = req.params.id;
