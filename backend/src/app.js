@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 app.use("/api/products", require("./routes/products.routes"));
+app.use("/api/users", require("./routes/users.routes"));
 
 //#endregion
 
