@@ -4,7 +4,6 @@ const { SECRET_KEY } = process.env;
 const generateAuthToken = (userID, res) => {
   const payload = { userID };
   const healthToken = 60 * 60 * 24;
-  console.log("vida del token: ", healthToken);
   const token = jwt.sign(payload, SECRET_KEY, {
     expiresIn: healthToken,
   });
@@ -18,11 +17,9 @@ const verifyAuthToken = (req, res, next) => {
     try {
       const decode = jwt.verify(token, SECRET_KEY);
       generateAuthToken(decode.userID, res);
-      console.log(decode.userID);
-      console.log("ruta:", req.route.path);
       req.body = { ...req.body, userID: decode.userID };
     } catch (error) {
-      console.log(error);
+      console.error(error);
       if (error.name === "TokenExpiredError") {
         return res.json({
           success: 0,

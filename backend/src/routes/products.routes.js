@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const { verifyAuthToken } = require("../services/jwt");
 
 const productsRouter = Router();
 

@@ -2,7 +2,6 @@ const usersController = {};
 
 var SHA256 = require("crypto-js/sha256");
 const userModel = require("../models/user.model");
-const { use } = require("../routes/users.routes");
 const { generateAuthToken } = require("../services/jwt");
 
 usersController.getUsers = async (req, res) => {

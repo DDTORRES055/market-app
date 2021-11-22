@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
+const { verifyAuthToken } = require("./services/jwt");
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
-app.use("/api/products", require("./routes/products.routes"));
+app.use("/api/products", verifyAuthToken, require("./routes/products.routes"));
 app.use("/api/users", require("./routes/users.routes"));
 
 //#endregion
