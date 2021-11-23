@@ -24,3 +24,8 @@
   width: 1300px;
   height: 22px;
 }
+
+#main-buttons {
+  display: flex;
+  justify-content: center;
+}

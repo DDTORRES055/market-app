@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { MainContext } from "../../Context/MainContext.context";
 import "./Main.styles.css";
 import ProductsTable from "../ProductsTable/ProductsTable.component";
@@ -11,9 +12,15 @@ import DisableProductForm from "../Forms/DisableProductForm/DisableProductForm.c
 import Button from "../Button/Button.component";
 
 export default function MainMenu() {
-  const { successMessage, products, setModalVisible } = useContext(MainContext);
+  const { successMessage, products, setModalVisible, authenticated, logout } = useContext(MainContext);
+
+  useEffect(() => {
+    setModalVisible(null);
+  }, []);
+
   return (
     <div id="main">
+      {!authenticated && <Redirect to="/login"></Redirect>}
       <Modal>
         <AddProductForm form="addProduct" />
       </Modal>
@@ -32,7 +39,10 @@ export default function MainMenu() {
       <div id="main-title">Catálogo de productos</div>
       <div id="main-message">{successMessage}</div>
       <ProductsTable products={products} />
-      <Button onClick={() => setModalVisible("addProduct")} text="Registrar" />
+      <div id="main-buttons">
+        <Button onClick={() => setModalVisible("addProduct")} text="Registrar" />
+        <Button onClick={() => logout()} text="Salir" />
+      </div>
     </div>
   );
 }

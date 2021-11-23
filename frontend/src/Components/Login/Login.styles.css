@@ -1,0 +1,13 @@
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#login .login-container {
+  text-align: center;
+  background-color: #a2c4c9;
+  border: solid 3px black;
+  border-radius: 3px;
+}

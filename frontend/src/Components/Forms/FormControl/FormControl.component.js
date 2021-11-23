@@ -10,7 +10,7 @@ export default function FormControls(props) {
           {props.label}
         </label>
         <div className="form-imput">
-          <input type="text" id={props.id} value={props.value} onChange={props.onChange} />
+          <input type={props.type || "text"} id={props.id} value={props.value} onChange={props.onChange} />
           <div className={`error-message ${props.duplicated ? "duplicated" : ""}`}>{props.message}</div>
         </div>
       </div>

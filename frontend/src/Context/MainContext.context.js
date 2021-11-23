@@ -8,17 +8,39 @@ const MainProvider = ({ children }) => {
   const [modalVisible, setModalVisible] = useState(null);
   const [productToUpdate, setProductToUpdate] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
       const response = await Request.get("/products");
+      checkAuth(response);
       setProducts(response.data);
     };
     getProducts();
     setRefresh(false);
+    setAuthenticated(!!localStorage.getItem("access-token"));
   }, [refresh]);
+
+  const checkAuth = (response) => {
+    if (!response.data.success && response.data.failAuth) {
+      logout();
+    }
+  };
+
+  const login = async (username, password) => {
+    const response = await Request.post("/users/login", { username, password });
+    if (!!response.data.success) {
+      setAuthenticated(response.data.success);
+      return response.data.success;
+    }
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    setAuthenticated(false);
+  };
 
   const addProduct = async (barcode, name, quantity) => {
     const response = await Request.post("/products", { barcode, name, quantity });
@@ -26,6 +48,7 @@ const MainProvider = ({ children }) => {
       setRefresh(true);
       return response.data.success;
     }
+    checkAuth(response);
   };
 
   const getProduct = async (id) => {
@@ -33,6 +56,7 @@ const MainProvider = ({ children }) => {
     if (!!response.data.success) {
       return response.data.product;
     }
+    checkAuth(response);
     return {};
   };
 
@@ -42,6 +66,7 @@ const MainProvider = ({ children }) => {
       setRefresh(true);
       return response.data.success;
     }
+    checkAuth(response);
   };
 
   const setPrice = async (id, price) => {
@@ -50,6 +75,7 @@ const MainProvider = ({ children }) => {
       setRefresh(true);
       return response.data.success;
     }
+    checkAuth(response);
   };
 
   const enable = async (id) => {
@@ -58,6 +84,7 @@ const MainProvider = ({ children }) => {
       setRefresh(true);
       return response.data.success;
     }
+    checkAuth(response);
   };
 
   const disable = async (id) => {
@@ -66,6 +93,7 @@ const MainProvider = ({ children }) => {
       setRefresh(true);
       return response.data.success;
     }
+    checkAuth(response);
   };
 
   const isDuplicated = async (barcode) => {
@@ -75,6 +103,7 @@ const MainProvider = ({ children }) => {
 
   const isDuplicatedForUpdate = async (id, barcode) => {
     const response = await Request.get(`/products/isDuplicatedForUpdate/${id}/${barcode}`);
+    checkAuth(response);
     return response.data.duplicated;
   };
 
@@ -96,6 +125,9 @@ const MainProvider = ({ children }) => {
         setProductToUpdate,
         successMessage,
         setSuccessMessage,
+        login,
+        logout,
+        authenticated,
       }}
     >
       {children}
