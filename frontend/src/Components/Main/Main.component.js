@@ -13,10 +13,11 @@ import DeleteProductForm from "../Forms/DeleteProductForm/DeleteProductForm.comp
 import Button from "../Button/Button.component";
 
 export default function MainMenu() {
-  const { successMessage, products, setModalVisible, authenticated, logout } = useContext(MainContext);
+  const { successMessage, products, setModalVisible, authenticated, logout, setRefresh } = useContext(MainContext);
 
   useEffect(() => {
     setModalVisible(null);
+    setRefresh(true);
   }, []);
 
   return (

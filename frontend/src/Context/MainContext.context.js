@@ -16,7 +16,9 @@ const MainProvider = ({ children }) => {
     const getProducts = async () => {
       const response = await Request.get("/products");
       checkAuth(response);
-      setProducts(response.data);
+      if (response.data.success) {
+        setProducts(response.data.products);
+      }
     };
     getProducts();
     setRefresh(false);
@@ -138,6 +140,7 @@ const MainProvider = ({ children }) => {
         login,
         logout,
         authenticated,
+        setRefresh,
       }}
     >
       {children}

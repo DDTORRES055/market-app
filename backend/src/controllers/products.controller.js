@@ -4,7 +4,7 @@ const productModel = require("../models/product.model");
 
 productsController.getProducts = async (req, res) => {
   const products = await productModel.find();
-  res.json(products);
+  res.json({ success: true, products });
 };
 
 productsController.getProduct = async (req, res) => {
