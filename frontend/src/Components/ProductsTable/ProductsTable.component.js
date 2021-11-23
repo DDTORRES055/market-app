@@ -69,6 +69,18 @@ export default function ProductsTable(props) {
                   }}
                 />
               )}
+              {!product.barcode || product.enabled ? (
+                <img className="empty-icon" src="/images/nanai.png" alt="Vacio" />
+              ) : (
+                <img
+                  src="/images/delete.png"
+                  alt="Editar"
+                  onClick={async () => {
+                    setProductToUpdate(await getProduct(product._id));
+                    setModalVisible("deleteProduct");
+                  }}
+                />
+              )}
             </div>
           </td>
         </tr>

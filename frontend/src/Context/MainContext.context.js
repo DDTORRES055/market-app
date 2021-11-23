@@ -87,6 +87,15 @@ const MainProvider = ({ children }) => {
     checkAuth(response);
   };
 
+  const deleteProduct = async (id) => {
+    const response = await Request.delete(`/products/${id}`);
+    if (!!response.data.success) {
+      setRefresh(true);
+      return response.data.success;
+    }
+    checkAuth(response);
+  };
+
   const disable = async (id) => {
     const response = await Request.put(`/products/disable/${id}`);
     if (!!response.data.success) {
@@ -114,6 +123,7 @@ const MainProvider = ({ children }) => {
         addProduct,
         getProduct,
         updateProduct,
+        deleteProduct,
         setPrice,
         enable,
         disable,

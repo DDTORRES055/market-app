@@ -9,6 +9,7 @@ import UpdateProductForm from "../Forms/UpdateProductForm/UpdateProductForm.comp
 import AddPriceForm from "../Forms/AddPriceForm/AddPriceForm.component";
 import EnableProductForm from "../Forms/EnableProductForm/EnableProductForm.component";
 import DisableProductForm from "../Forms/DisableProductForm/DisableProductForm.component";
+import DeleteProductForm from "../Forms/DeleteProductForm/DeleteProductForm.component";
 import Button from "../Button/Button.component";
 
 export default function MainMenu() {
@@ -35,6 +36,9 @@ export default function MainMenu() {
       </Modal>
       <Modal>
         <DisableProductForm form="disableProduct" />
+      </Modal>
+      <Modal>
+        <DeleteProductForm form="deleteProduct" />
       </Modal>
       <div id="main-title">Catálogo de productos</div>
       <div id="main-message">{successMessage}</div>
