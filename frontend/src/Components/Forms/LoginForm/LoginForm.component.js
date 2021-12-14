@@ -45,7 +45,7 @@ export default function LoginForm() {
 
   return (
     <div className="form-contain" id="loginForm">
-      {authenticated && <Redirect to="/"></Redirect>}
+      {authenticated && <Redirect to="/main"></Redirect>}
       <div className="form-title">Ingresar</div>
       <form>
         <div className="form-inputs">

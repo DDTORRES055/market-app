@@ -22,7 +22,7 @@ export default function MainMenu() {
 
   return (
     <div id="main">
-      {!authenticated && <Redirect to="/login"></Redirect>}
+      {!authenticated && <Redirect to="/"></Redirect>}
       <Modal>
         <AddProductForm form="addProduct" />
       </Modal>

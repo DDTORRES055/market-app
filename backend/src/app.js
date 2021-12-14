@@ -31,6 +31,9 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
+app.get("/main", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "index.html"));
+});
 app.use("/api/products", verifyAuthToken, require("./routes/products.routes"));
 app.use("/api/users", require("./routes/users.routes"));
 

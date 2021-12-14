@@ -16,8 +16,8 @@ function App() {
     <MainProvider>
       <Router>
         <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/login" exact component={Login} />
+          <Route path="/main" exact component={Main} />
+          <Route path="/" exact component={Login} />
         </Switch>
       </Router>
     </MainProvider>
