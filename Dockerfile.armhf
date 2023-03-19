@@ -1,0 +1,28 @@
+FROM arm32v7/alpine AS BUILD_IMAGE
+
+# couchbase sdk requirements
+RUN apk update && apk add nodejs=14.18.1-r0 npm=7.17.0-r0 && rm -rf /var/cache/apk/*
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+# install dependencies
+RUN npm ci --production=true
+
+# remove development dependencies
+RUN npm prune --production
+
+FROM arm32v7/alpine
+
+# couchbase sdk requirements
+RUN apk update && apk add nodejs=14.18.1-r0 npm=7.17.0-r0 && rm -rf /var/cache/apk/* && npm install -g pm2
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+# copy from build image
+COPY --from=BUILD_IMAGE /usr/src/app/node_modules ./node_modules
+
+CMD [ "pm2-runtime", "start", "src/index.js", "--name", "traderbot" ]

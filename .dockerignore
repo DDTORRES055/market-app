@@ -1,0 +1,8 @@
+.vscode
+node_modules
+.scannerwork
+.env
+sonar-project.properties
+coverage
+test
+.gitignore

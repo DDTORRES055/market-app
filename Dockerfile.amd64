@@ -1,0 +1,34 @@
+FROM alpine AS BUILD_IMAGE
+
+# couchbase sdk requirements
+RUN apk update && apk add nodejs=14.18.1-r0 npm=7.17.0-r0 curl bash python3 g++ make && rm -rf /var/cache/apk/*
+
+# install node-prune (https://github.com/tj/node-prune)
+RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+# install dependencies
+RUN npm ci --production=true
+
+# remove development dependencies
+RUN npm prune --production
+
+# run node prune
+RUN /usr/local/bin/node-prune
+
+FROM alpine
+
+# couchbase sdk requirements
+RUN apk update && apk add nodejs=14.18.1-r0 npm=7.17.0-r0 && rm -rf /var/cache/apk/* && npm install -g pm2
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+# copy from build image
+COPY --from=BUILD_IMAGE /usr/src/app/node_modules ./node_modules
+
+CMD [ "pm2-runtime", "start", "src/index.js", "--name", "traderbot" ]
