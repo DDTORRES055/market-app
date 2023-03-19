@@ -9,7 +9,7 @@ authController.login = async (req, res) => {
   const user = await userModel.find({ username })
 
   if (user?.[0]?.password == SHA256(password)) {
-    generateAuthToken({ userID: user[0]._id }, res)
+    generateAuthToken({ userID: user[0]._id, role: "asd" }, res)
     res.json({ success: true, user: user[0] })
   } else {
     res.json({ success: false, message: 'Auth failed' })

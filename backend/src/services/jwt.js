@@ -15,8 +15,11 @@ const verifyAuthToken = (req, res, next) => {
   if (token) {
     try {
       const decode = jwt.verify(token, constants.enviroment.secretKey)
-      generateAuthToken({ userID: decode.userID }, res)
-      req.body = { ...req.body, userID: decode.userID }
+      const payload = { ...decode }
+      delete payload.iat
+      delete payload.exp
+      generateAuthToken(payload, res)
+      req.body = { ...req.body, ...payload }
     } catch (error) {
       console.error(error)
       if (error.name === 'TokenExpiredError') {

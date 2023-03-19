@@ -12,6 +12,4 @@ usersRouter
   .put(usersController.updateUser)
   .delete(usersController.deleteUser);
 
-usersRouter.route("/login").post(usersController.login);
-
 module.exports = usersRouter;
