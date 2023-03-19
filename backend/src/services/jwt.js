@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken')
 const constants = require('../constants')
 
-const generateAuthToken = (userID, res) => {
-  const payload = { userID }
+const generateAuthToken = (payload, res) => {
   const healthToken = 60 * 60 * 24
   const token = jwt.sign(payload, constants.enviroment.secretKey, {
     expiresIn: healthToken,
@@ -16,7 +15,7 @@ const verifyAuthToken = (req, res, next) => {
   if (token) {
     try {
       const decode = jwt.verify(token, constants.enviroment.secretKey)
-      generateAuthToken(decode.userID, res)
+      generateAuthToken({ userID: decode.userID }, res)
       req.body = { ...req.body, userID: decode.userID }
     } catch (error) {
       console.error(error)

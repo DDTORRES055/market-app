@@ -30,7 +30,8 @@ app.use(morgan('dev'))
 //#region Routes
 
 app.use('/products', verifyAuthToken, require('./routes/products.routes'))
-app.use('/users', require('./routes/users.routes'))
+app.use('/users', verifyAuthToken, require('./routes/users.routes'))
+app.use('/auth', require('./routes/auth.routes'))
 
 //#endregion
 
