@@ -3,8 +3,8 @@ const productsController = {}
 const productModel = require('../models/product.model')
 
 productsController.getProducts = async (req, res) => {
-  const { userID, role } = req.body
-  console.log({ userID, role })
+  const { userID, role, number } = req.body
+  console.log({ userID, role, number })
   const products = await productModel.find()
   res.json({ success: true, products })
 }
